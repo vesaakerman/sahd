@@ -1,3 +1,8 @@
+---
+semantic_fields: something_2, something_1
+contributors: koster_marinus
+---
+
 <img src="../../img/banner.png" alt="banner" width="800" height="100"> 
 
 # **אַח – brazier**

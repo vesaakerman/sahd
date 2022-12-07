@@ -6,14 +6,16 @@ Contact the editors of the Semantics of Ancient Hebrew Database via e-mail or th
 
 ### Prof.dr. Klaas Spronk
 
-President of SAHD
-Professor of Old Testament at the [Protestant Theological University](https://www.pthu.nl/) (Amsterdam, the Netherlands).
+President of SAHD<br>
+Professor of Old Testament at the 
+[Protestant Theological University](https://www.pthu.nl/){target=_blank} (Amsterdam, the Netherlands).
 
 E-mail: [k.spronk@pthu.nl](mailto:k.spronk@pthu.nl)
 
 ### Dr. Paul Sanders
 
-Secretary SAHD
-Assistent professor of Old Testament at the [Protestant Theological University](https://www.pthu.nl/) (Amsterdam, the Netherlands).
+Secretary SAHD<br>
+Assistent professor of Old Testament at the 
+[Protestant Theological University](https://www.pthu.nl/){target=_blank} (Amsterdam, the Netherlands).
 
 E-mail: [p.sanders@pthu.nl](mailto:p.sanders@pthu.nl)

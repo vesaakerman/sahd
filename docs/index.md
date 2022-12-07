@@ -7,6 +7,7 @@ The Semantics of Ancient Hebrew Database project aims to provide a structured an
 Read the  [foundational description of the project](other/project_description.md) (1994).
 
 The currently participating centres include the following universities: Amsterdam, Bonn, 
-[Cambridge](https://www.sahd.divinity.cam.ac.uk/), 
-Edinburgh, Florence, [Oxford](https://www.orinst.ox.ac.uk/semantics-ancient-hebrew-database-sahd), 
+[Cambridge](https://www.sahd.divinity.cam.ac.uk/){target=_blank}, 
+Edinburgh, Florence, 
+[Oxford](https://www.orinst.ox.ac.uk/semantics-ancient-hebrew-database-sahd){target=_blank}, 
 Leiden, Rome.

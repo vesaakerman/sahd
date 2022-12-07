@@ -15,8 +15,13 @@ nav:
             - 'Korpel, Marjo': 'contributors/korpel_marjo.md'
             - 'Koster, Marinus': 'contributors/koster_marinus.md'
     - Partners: 'other/partners.md'
+    - Contribution: 'other/contribution.md'
     - Contact: 'other/contact.md'
 
 theme:
     name: material
+
+markdown_extensions:
+    - attr_list
+
 

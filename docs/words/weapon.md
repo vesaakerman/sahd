@@ -1,3 +1,8 @@
+---
+semantic_fields: something_2
+contributors: beentjes_pancratius
+---
+
 <img src="../../img/banner.png" alt="banner" width="800" height="100"> 
 
 # **אָזֵן  – weapon**
