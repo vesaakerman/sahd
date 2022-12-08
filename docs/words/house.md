@@ -1,4 +1,6 @@
 ---
+word_english: house
+word_hebrew: בַּיִת
 semantic_fields: something_1
 contributors: korpel_marjo
 ---
@@ -8,7 +10,7 @@ contributors: korpel_marjo
 # **בַּיִת – house**
 
 Semantic Fields:
-[Something 1](../semantic_fields/something_1.md)
+[something_1](../semantic_fields/something_1.md)    
 
 ## 1. Statistics
 Torah: 345. 

@@ -7,11 +7,6 @@ contributors: beentjes_pancratius
 
 <img src="../../img/banner.png" alt="banner" width="800" height="100"> 
 
-# **באָזֵן – weapon**
-
-Semantic Fields:
-[something_2](../semantic_fields/something_2.md)    [something_1](../semantic_fields/something_1.md)    
-
 ## 1. Statistics
 Torah: 1 – Deut. 23:14.
 

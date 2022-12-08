@@ -1,27 +1,22 @@
 ---
-word_english: brazier
-word_hebrew: אַח
-semantic_fields: something_2
-contributors: koster_marinus
+word_english: house
+word_hebrew: בַּיִת
+semantic_fields: something_1
+contributors: korpel_marjo
 ---
 
 <img src="../../img/banner.png" alt="banner" width="800" height="100"> 
 
-# **אַח – brazier**
-
-Semantic Fields:
-[something_2](../semantic_fields/something_2.md)    
-
 ## 1. Statistics
-Torah: 0. 
+Torah: 345. 
 
-Nebiim: 3. 
+Nebiim: 1314. 
 
-Ketubim: 0. 
+Ketubim: 675. 
 
-Total: 3.
+Total: 2334.
 
-Attested in Jeremiah 36:22, 23[bis].
+As a container qualifying adoption in this work, only once in theNebiim
 
 ## 2a. Literal Use
 Et eius error aut assumenda labore aut voluptatem Quis aut tempore nobis ut quos dolore est quia itaque. Et consectetur porro eos sapiente architecto ut sunt necessitatibus et culpa quisquam qui voluptatem eaque et officia commodi et rerum veritatis. Et nisi tempora cum nobis fuga in ipsa dolorem.
@@ -51,6 +46,7 @@ Vel dolores maxime et debitis necessitatibus. In odit animi nam ullam molestiae 
 Sequi doloremque sit atque voluptatem est fugit assumenda et soluta asperiores. Vel molestiae voluptatibus aut recusandae esse et quasi officiis id ullam nostrum eum accusamus perferendis ea deleniti reiciendis cum dolor dolor? Ex labore odio ut galisum doloribus qui quam expedita et eius aspernatur. 
 
 ## 10. Bibliography
- Dalman,
- AuS 
-, Bd. 4, 10; Bd. 7, 205: ‘Heizherd’ 
+ AncBD 
+, vol. 3, 832: ‘tabular soul cases’ – Astley 1929: H.J.D.Astley,
+ Biblical Anthropology Compared with and Illustrated by the Folklore of Europe and the Customs of Primitive Peoples 
+, London1929, 79-83 –  
