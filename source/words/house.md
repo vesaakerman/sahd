@@ -5,8 +5,6 @@ semantic_fields: something_1
 contributors: korpel_marjo
 ---
 
-<img src="../../img/banner.png" alt="banner" width="800" height="100"> 
-
 ## 1. Statistics
 Torah: 345. 
 

@@ -4,13 +4,13 @@ word_hebrew: באָזֵן
 semantic_fields: something_2, something_1
 contributors: beentjes_pancratius
 ---
-
-<img src="../../img/banner.png" alt="banner" width="800" height="100"> 
+<img src="../../img/banner.png" alt="banner" width="800" height="100">
 
 # **באָזֵן – weapon**
 
 Semantic Fields:
-[something_2](../semantic_fields/something_2.md)    [something_1](../semantic_fields/something_1.md)    
+[something_2](../semantic_fields/something_2.md)&nbsp;&nbsp;&nbsp;[something_1](../semantic_fields/something_1.md)&nbsp;&nbsp;&nbsp;
+
 
 ## 1. Statistics
 Torah: 1 – Deut. 23:14.

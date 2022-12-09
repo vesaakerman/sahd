@@ -5,8 +5,6 @@ semantic_fields: something_2, something_1
 contributors: beentjes_pancratius
 ---
 
-<img src="../../img/banner.png" alt="banner" width="800" height="100"> 
-
 ## 1. Statistics
 Torah: 1 – Deut. 23:14.
 

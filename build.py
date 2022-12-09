@@ -22,6 +22,8 @@ WORDS_DOCS = DOCS / "words"
 SEMANTIC_FIELDS_DOCS = DOCS / "semantic_fields"
 CONTRIBUTORS_DOCS = DOCS / "contributors"
 
+HEADER = '<img src="../../img/banner.png" alt="banner" width="800" height="100">\n\n'
+
 errors = []
 
 def readArgs():
@@ -88,7 +90,13 @@ def show_errors():
 
 
 def get_values(line):
-    return line[line.index(":") + 1:].split(",")
+    value_list = []
+    values = line[line.index(":") + 1:].split(",")
+    for value in values:
+        if value.strip():
+            value_list.append(value.strip())
+    return value_list
+
 
 def get_relations():
     semantic_fields = {}
@@ -100,24 +108,25 @@ def get_relations():
             lines = f.readlines()
             for line in lines:
                 if line.startswith("word_english:"):
-                    word_english = get_values(line)[0].strip()
+                    word_english = get_values(line)[0]
+                elif line.startswith("word_hebrew:"):
+                    word_hebrew = get_values(line)[0]
                 elif line.startswith("semantic_fields:") or line.startswith("contributors:"):
                     if not word_english:
-                        error(f"{word.name}: english word not given")
+                        error(f"english word in {word.name} metadata not given")
                         continue
                     keys = get_values(line)
                     for key in keys:
-                        key = key.strip()
                         if line.startswith("semantic_fields:"):
                             if key in semantic_fields.keys():
-                                semantic_fields[key] = semantic_fields[key] + [word_english]
+                                semantic_fields[key] = semantic_fields[key] + [(word_english, word_hebrew)]
                             else:
-                                semantic_fields[key] = [word_english]
+                                semantic_fields[key] = [(word_english, word_hebrew)]
                         else:
                             if key in contributors.keys():
-                                contributors[key] = contributors[key] + [word_english]
+                                contributors[key] = contributors[key] + [(word_english, word_hebrew)]
                             else:
-                                contributors[key] = [word_english]
+                                contributors[key] = [(word_english, word_hebrew)]
 
     # sort semantic fields and contributors dictionaries
     semantic_fields_dict, contributors_dict = {}, {}
@@ -132,67 +141,98 @@ def write_words():
     if isdir(WORDS_DOCS):
         rmtree(WORDS_DOCS)
     os.mkdir(WORDS_DOCS)
+
     for word in WORDS.glob("*"):
-        text = []
-        with open(WORDS / word.name, "r") as f:
-            word_english, word_hebrew = "", ""
-            semantic_fields = []
+        filename = word.name
+        text, semantic_fields, word_english, word_hebrew, first_dashes, second_dashes = [], [], "", "", False, False
+        with open(WORDS / filename, "r") as f:
             lines = f.readlines()
             for line in lines:
-                if line.startswith("word_english:"):
-                    word_english = get_values(line)[0].strip()
+                text.append(line)
+                if line.strip() == "---" and not first_dashes:
+                    first_dashes = True
+                elif line.startswith("word_english:"):
+                    word_english = get_values(line)[0]
                 elif line.startswith("word_hebrew:"):
-                    word_hebrew = get_values(line)[0].strip()
+                    word_hebrew = get_values(line)[0]
                 elif line.startswith("semantic_fields:"):
                     semantic_fields = get_values(line)
-                elif "1. Statistics" in line:
+                elif line.strip() == "---" and not second_dashes:
+                    second_dashes = True
+                    text.append(HEADER)
+                    if not word_english or not word_hebrew:
+                        error(f"Metadata for {filename} incomplete")
                     text.append(f"# **{word_hebrew} – {word_english}**\n\n")
-                    text.append("Semantic Fields:\n")
-                    for sf in semantic_fields:
-                        sf = sf.strip()
-                        text.append(f"[{sf}](../semantic_fields/{sf}.md)    ")
-                    text.append("\n\n")
-                text.append(line)
-        with open(WORDS_DOCS / word.name, "w") as f:
+                    if len(semantic_fields) > 0:
+                        text.append("Semantic Fields:\n")
+                        for sf in semantic_fields:
+                            text.append(f"[{sf}](../semantic_fields/{sf}.md)&nbsp;&nbsp;&nbsp;")
+                        text.append("\n\n")
+        if not second_dashes:
+            error(f"Metadata for {filename} incomplete")
+
+        with open(WORDS_DOCS / filename, "w") as f:
             f.write("".join(text))
 
 
 def write_semantic_fields(semantic_fields_dict):
-    # copytree(SEMANTIC_FIELDS, SEMANTIC_FIELDS_DOCS, dirs_exist_ok = True)
+    if isdir(SEMANTIC_FIELDS_DOCS):
+        rmtree(SEMANTIC_FIELDS_DOCS)
+    copytree(SEMANTIC_FIELDS, SEMANTIC_FIELDS_DOCS)
 
     for s_field in semantic_fields_dict:
+        name = s_field.capitalize().replace("_", " ")
+        words = semantic_fields_dict[s_field]
+
         if not exists(f"{SEMANTIC_FIELDS_DOCS / s_field}.md"):
             with open(f"{SEMANTIC_FIELDS_DOCS / s_field}.md", 'w') as f:
-                name = s_field.capitalize().replace("_", " ")
-                f.write(f'<img src="../../img/banner.png" alt="banner" width="800" height="100">\n\n # **{name}**\n\n### Related words')
+                f.write(f'# **{name}**\n\n')
+                f.close()
 
-        # print(semantic_fields_dict[s_field])
-        #     word_english, word_hebrew = "", ""
-        #     semantic_fields = []
-        #     lines = f.readlines()
-        #     for line in lines:
-        #         if line.startswith("word_english:"):
-        #             word_english = get_values(line)[0].strip()
-        #         elif line.startswith("word_hebrew:"):
-        #             word_hebrew = get_values(line)[0].strip()
-        #         elif line.startswith("semantic_fields:"):
-        #             semantic_fields = get_values(line)
-        #         elif "1. Statistics" in line:
-        #             text.append(f"# **{word_hebrew} – {word_english}**\n\n")
-        #             text.append("Semantic Fields:\n")
-        #             for sf in semantic_fields:
-        #                 sf = sf.strip()
-        #                 text.append(f"[{sf}](../semantic_fields/{sf}.md)    ")
-        #             text.append("\n\n")
-        #         text.append(line)
-        # with open(WORDS_DOCS / word.name, "w") as f:
-        #     f.write("".join(text))
+        text = [HEADER]
+        with open(f"{SEMANTIC_FIELDS_DOCS / s_field}.md", 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                text.append(line)
+            text.append("\n### Related words\n")
+            for word in words:
+                text.append(f"[{word[1]} – {word[0]}](../words/{word[0]}.md)<br>")
+
+        with open(f"{SEMANTIC_FIELDS_DOCS / s_field}.md", 'w') as f:
+            f.write("".join(text))
+
+
+def write_contributors(contributors_dict):
+    if isdir(CONTRIBUTORS_DOCS):
+        rmtree(CONTRIBUTORS_DOCS)
+    copytree(CONTRIBUTORS, CONTRIBUTORS_DOCS)
+
+    for contributor in contributors_dict:
+        name = contributor.capitalize().replace("_", " ")
+        words = contributors_dict[contributor]
+
+        if not exists(f"{CONTRIBUTORS_DOCS / contributor}.md"):
+            with open(f"{CONTRIBUTORS_DOCS / contributor}.md", 'w') as f:
+                f.write(f'# **{name}**\n\n')
+                f.close()
+
+        text = [HEADER]
+        with open(f"{CONTRIBUTORS_DOCS / contributor}.md", 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                text.append(line)
+            text.append("\n### Contributions\n")
+            for word in words:
+                text.append(f"[{word[1]} – {word[0]}](../words/{word[0]}.md)<br>")
+
+        with open(f"{CONTRIBUTORS_DOCS / contributor}.md", 'w') as f:
+            f.write("".join(text))
 
 
 def write_docs(semantic_fields_dict, contributors_dict):
     write_words()
     write_semantic_fields(semantic_fields_dict)
-
+    write_contributors(contributors_dict)
 
 def make_docs():
     semantic_fields_dict, contributors_dict = get_relations()
