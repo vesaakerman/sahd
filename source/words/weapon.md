@@ -1,6 +1,6 @@
 ---
 word_english: weapon
-word_hebrew: באָזֵן
+word_hebrew: אָזֵן
 semantic_fields: something_2, something_1
 contributors: beentjes_pancratius
 ---

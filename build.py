@@ -98,22 +98,34 @@ def get_values(line):
     return value_list
 
 
+# def get_reversed(word):
+#     r = [""]
+#     for i in range(len(word)):
+#         r.append(word[len(word) - i - 1])
+#     return "".join(r)
+#
+
 def get_relations():
-    semantic_fields = {}
-    contributors = {}
+    semantic_fields, contributors, words = {}, {}, {}
 
     for word in WORDS.glob("*"):
         with open(WORDS / word.name, "r") as f:
-            word_english = ""
+            word_english, word_hebrew = "", ""
             lines = f.readlines()
             for line in lines:
                 if line.startswith("word_english:"):
                     word_english = get_values(line)[0]
                 elif line.startswith("word_hebrew:"):
                     word_hebrew = get_values(line)[0]
+                    key = word_hebrew[0]
+                    word_hebrew = "".join(reversed(word_hebrew))
+                    if key in words.keys():
+                        words[key] = words[key] + [(word_hebrew, word_english)]
+                    else:
+                        words[key] = [(word_hebrew, word_english)]
                 elif line.startswith("semantic_fields:") or line.startswith("contributors:"):
-                    if not word_english:
-                        error(f"english word in {word.name} metadata not given")
+                    if not word_english or not word_hebrew:
+                        error(f"english and/or hebrew word in {word.name} metadata not given")
                         continue
                     keys = get_values(line)
                     for key in keys:
@@ -128,13 +140,15 @@ def get_relations():
                             else:
                                 contributors[key] = [(word_english, word_hebrew)]
 
-    # sort semantic fields and contributors dictionaries
-    semantic_fields_dict, contributors_dict = {}, {}
+    # sort dictionaries
+    semantic_fields_dict, contributors_dict, words_dict = {}, {}, {}
     for i in sorted(semantic_fields):
         semantic_fields_dict[i] =  sorted(semantic_fields[i])
     for i in sorted(contributors):
         contributors_dict[i] =  sorted(contributors[i])
-    return semantic_fields_dict, contributors_dict
+    for i in sorted(words):
+        words_dict[i] = sorted(words[i], reverse=True)
+    return semantic_fields_dict, contributors_dict, words_dict
 
 
 def write_words():
@@ -229,14 +243,38 @@ def write_contributors(contributors_dict):
             f.write("".join(text))
 
 
-def write_docs(semantic_fields_dict, contributors_dict):
+def write_navigation(semantic_fields_dict, contributors_dict, words_dict):
+
+    text = []
+    with open(SRC / "mkdocs_in.yml", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            text.append(line)
+            if line.replace(" ", "").startswith("-Words:"):
+                for letter in words_dict:
+                    text.append(f"            - {letter}:\n")
+                    for word in words_dict[letter]:
+                        text.append(f"                - {word[0]} - {word[1]}: words/{word[1]}.md\n")
+            elif line.replace(" ", "").startswith("-Semanticfields:"):
+                for s_field in semantic_fields_dict:
+                    text.append(f"            - {s_field}: semantic_fields/{s_field}.md\n")
+            elif line.replace(" ", "").startswith("-Contributors:"):
+                for contributor in contributors_dict:
+                    text.append(f"            - {contributor}: contributors/{contributor}.md\n")
+    with open("mkdocs.yml", 'w') as f:
+        f.write("".join(text))
+
+
+def write_docs(semantic_fields_dict, contributors_dict, words_dict):
     write_words()
     write_semantic_fields(semantic_fields_dict)
     write_contributors(contributors_dict)
+    write_navigation(semantic_fields_dict, contributors_dict, words_dict)
+
 
 def make_docs():
-    semantic_fields_dict, contributors_dict = get_relations()
-    write_docs(semantic_fields_dict, contributors_dict)
+    semantic_fields_dict, contributors_dict, words_dict = get_relations()
+    write_docs(semantic_fields_dict, contributors_dict, words_dict)
     show_errors()
 
 

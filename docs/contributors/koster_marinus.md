@@ -3,4 +3,4 @@
 # **Dr. M.D. Koster**
 
 ### Contributions
-[אַח – brazier](../words/brazier.md)<br>
+[חַא – brazier](../words/brazier.md)<br>

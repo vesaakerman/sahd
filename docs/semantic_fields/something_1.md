@@ -4,4 +4,4 @@
 
 
 ### Related words
-[בַּיִת – house](../words/house.md)<br>[באָזֵן – weapon](../words/weapon.md)<br>
+[תִיַּב – house](../words/house.md)<br>[ןֵזָא – weapon](../words/weapon.md)<br>

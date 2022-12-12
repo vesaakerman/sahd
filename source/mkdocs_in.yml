@@ -1,0 +1,17 @@
+site_name: SAHD
+nav:
+    - Home: index.md
+    - Words:
+    - Semantic fields:
+    - Contributors:
+    - Partners: 'other/partners.md'
+    - Contribution: 'other/contribution.md'
+    - Contact: 'other/contact.md'
+
+theme:
+    name: material
+
+markdown_extensions:
+    - attr_list
+
+

@@ -5,4 +5,4 @@
 Professor (retired) of Old Testament, Tilburg School of Catholic Theology, Utrech
 
 ### Contributions
-[באָזֵן – weapon](../words/weapon.md)<br>
+[ןֵזָא – weapon](../words/weapon.md)<br>

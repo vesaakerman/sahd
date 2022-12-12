@@ -2,18 +2,18 @@ site_name: SAHD
 nav:
     - Home: index.md
     - Words:
-        - א:
-            - 'אָזֵן – weapon': 'words/weapon.md'
-            - 'אַח – brazier': 'words/brazier.md'
-        - ב:
-            - 'בַּיִת – house': 'words/house.md'
+            - א:
+                - ןֵזָא - weapon: words/weapon.md
+                - חַא - brazier: words/brazier.md
+            - ב:
+                - תִיַּב - house: words/house.md
     - Semantic fields:
-            - 'Something 1': 'semantic_fields/something_1.md'
-            - 'Something 2': 'semantic_fields/something_2.md'
+            - something_1: semantic_fields/something_1.md
+            - something_2: semantic_fields/something_2.md
     - Contributors:
-            - 'Beentjes, Pancratius': 'contributors/beentjes_pancratius.md'
-            - 'Korpel, Marjo': 'contributors/korpel_marjo.md'
-            - 'Koster, Marinus': 'contributors/koster_marinus.md'
+            - beentjes_pancratius: contributors/beentjes_pancratius.md
+            - korpel_marjo: contributors/korpel_marjo.md
+            - koster_marinus: contributors/koster_marinus.md
     - Partners: 'other/partners.md'
     - Contribution: 'other/contribution.md'
     - Contact: 'other/contact.md'
