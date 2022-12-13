@@ -4,7 +4,7 @@ word_hebrew: אַח
 semantic_fields: something_2
 contributors: koster_marinus
 ---
-<img src="../../img/banner.png" alt="banner" width="800" height="100">
+<img src="../../images/banner.png" alt="banner" width="800" height="100">
 
 # **אַח – brazier**
 

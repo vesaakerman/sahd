@@ -1,6 +1,3 @@
-<img src="../../img/banner.png" alt="banner" width="800" height="100"> 
-
-
 <div class="container">
   <h1>Contribution</h1>
   <form target="_self" action="https://formsubmit.co/vesaakerman@gmail.com" method="POST">

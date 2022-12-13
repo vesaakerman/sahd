@@ -11,12 +11,12 @@ nav:
             - something_1: semantic_fields/something_1.md
             - something_2: semantic_fields/something_2.md
     - Contributors:
-            - beentjes_pancratius: contributors/beentjes_pancratius.md
-            - korpel_marjo: contributors/korpel_marjo.md
-            - koster_marinus: contributors/koster_marinus.md
-    - Partners: 'other/partners.md'
-    - Contribution: 'other/contribution.md'
-    - Contact: 'other/contact.md'
+            - Beentjes Pancratius: contributors/beentjes_pancratius.md
+            - Korpel Marjo: contributors/korpel_marjo.md
+            - Koster Marinus: contributors/koster_marinus.md
+    - Partners: 'miscellaneous/partners.md'
+    - Contribution: 'miscellaneous/contribution.md'
+    - Contact: 'miscellaneous/contact.md'
 
 theme:
     name: material

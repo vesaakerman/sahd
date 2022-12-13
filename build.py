@@ -1,4 +1,3 @@
-import sys
 import os
 from os.path import exists, isdir
 from shutil import rmtree, copytree
@@ -6,7 +5,6 @@ from pathlib import Path
 import argparse
 from time import sleep
 from subprocess import run, Popen
-from collections import OrderedDict
 
 SAHD_BASE = Path(".")
 
@@ -18,15 +16,18 @@ DOCS = SAHD_BASE / "docs"
 WORDS = SRC / "words"
 SEMANTIC_FIELDS = SRC / "semantic_fields"
 CONTRIBUTORS = SRC / "contributors"
+MISCELLANEOUS = SRC / "miscellaneous"
 WORDS_DOCS = DOCS / "words"
 SEMANTIC_FIELDS_DOCS = DOCS / "semantic_fields"
 CONTRIBUTORS_DOCS = DOCS / "contributors"
+MISCELLANEOUS_DOCS = DOCS / "miscellaneous"
 
-HEADER = '<img src="../../img/banner.png" alt="banner" width="800" height="100">\n\n'
+HEADER = '<img src="../../images/banner.png" alt="banner" width="800" height="100">\n\n'
 
 errors = []
 
-def readArgs():
+
+def read_args():
     parser = argparse.ArgumentParser(description='SAHD - build.py',
         usage='use "%(prog)s --help" for more information',
         formatter_class=argparse.RawTextHelpFormatter)
@@ -45,19 +46,10 @@ def readArgs():
     return action, commit_msg
 
 
-# def console(msg, error=False, newline=True):
-#     msg = msg[1:] if msg.startswith("\n") else msg
-#     msg = msg[0:-1] if msg.endswith("\n") else msg
-#     target = sys.stderr if error else sys.stdout
-#     nl = "\n" if newline else ""
-#     target.write(f"{msg}{nl}")
-#     target.flush()
-
-
 def commit(task, msg):
     run(["git", "add", "--all", "."])
     run(["git", "commit", "-m", msg])
-    run(["git", "push", "origin", "master"])
+    run(["git", "push", "origin", "main"])
 
 
 def ship_docs():
@@ -98,15 +90,8 @@ def get_values(line):
     return value_list
 
 
-# def get_reversed(word):
-#     r = [""]
-#     for i in range(len(word)):
-#         r.append(word[len(word) - i - 1])
-#     return "".join(r)
-#
-
 def get_relations():
-    semantic_fields, contributors, words = {}, {}, {}
+    words, semantic_fields, contributors = {}, {}, {}
 
     for word in WORDS.glob("*"):
         with open(WORDS / word.name, "r") as f:
@@ -141,14 +126,15 @@ def get_relations():
                                 contributors[key] = [(word_english, word_hebrew)]
 
     # sort dictionaries
-    semantic_fields_dict, contributors_dict, words_dict = {}, {}, {}
+    words_dict, semantic_fields_dict, contributors_dict = {}, {}, {}
+    for i in sorted(words):
+        words_dict[i] = sorted(words[i], reverse=True)
     for i in sorted(semantic_fields):
         semantic_fields_dict[i] =  sorted(semantic_fields[i])
     for i in sorted(contributors):
         contributors_dict[i] =  sorted(contributors[i])
-    for i in sorted(words):
-        words_dict[i] = sorted(words[i], reverse=True)
-    return semantic_fields_dict, contributors_dict, words_dict
+
+    return words_dict, semantic_fields_dict, contributors_dict
 
 
 def write_words():
@@ -198,13 +184,13 @@ def write_semantic_fields(semantic_fields_dict):
         name = s_field.capitalize().replace("_", " ")
         words = semantic_fields_dict[s_field]
 
-        if not exists(f"{SEMANTIC_FIELDS_DOCS / s_field}.md"):
-            with open(f"{SEMANTIC_FIELDS_DOCS / s_field}.md", 'w') as f:
+        if not exists(SEMANTIC_FIELDS_DOCS / f"{s_field}.md"):
+            with open(SEMANTIC_FIELDS_DOCS / f"{s_field}.md", 'w') as f:
                 f.write(f'# **{name}**\n\n')
                 f.close()
 
         text = [HEADER]
-        with open(f"{SEMANTIC_FIELDS_DOCS / s_field}.md", 'r') as f:
+        with open(SEMANTIC_FIELDS_DOCS / f"{s_field}.md", 'r') as f:
             lines = f.readlines()
             for line in lines:
                 text.append(line)
@@ -212,7 +198,7 @@ def write_semantic_fields(semantic_fields_dict):
             for word in words:
                 text.append(f"[{word[1]} – {word[0]}](../words/{word[0]}.md)<br>")
 
-        with open(f"{SEMANTIC_FIELDS_DOCS / s_field}.md", 'w') as f:
+        with open(SEMANTIC_FIELDS_DOCS / f"{s_field}.md", 'w') as f:
             f.write("".join(text))
 
 
@@ -225,13 +211,13 @@ def write_contributors(contributors_dict):
         name = contributor.capitalize().replace("_", " ")
         words = contributors_dict[contributor]
 
-        if not exists(f"{CONTRIBUTORS_DOCS / contributor}.md"):
-            with open(f"{CONTRIBUTORS_DOCS / contributor}.md", 'w') as f:
+        if not exists(CONTRIBUTORS_DOCS / f"{contributor}.md"):
+            with open(CONTRIBUTORS_DOCS / f"{contributor}.md", 'w') as f:
                 f.write(f'# **{name}**\n\n')
                 f.close()
 
         text = [HEADER]
-        with open(f"{CONTRIBUTORS_DOCS / contributor}.md", 'r') as f:
+        with open(CONTRIBUTORS_DOCS / f"{contributor}.md", 'r') as f:
             lines = f.readlines()
             for line in lines:
                 text.append(line)
@@ -239,11 +225,45 @@ def write_contributors(contributors_dict):
             for word in words:
                 text.append(f"[{word[1]} – {word[0]}](../words/{word[0]}.md)<br>")
 
-        with open(f"{CONTRIBUTORS_DOCS / contributor}.md", 'w') as f:
+        with open(CONTRIBUTORS_DOCS / f"{contributor}.md", 'w') as f:
             f.write("".join(text))
 
 
-def write_navigation(semantic_fields_dict, contributors_dict, words_dict):
+def write_index_file(filename):
+    text = [HEADER.replace("../../images", "../images")]
+    with open(SRC / f"{filename}.md", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            text.append(line)
+
+    with open(DOCS / f"{filename}.md", 'w') as f:
+        f.write("".join(text))
+
+
+def write_miscellaneous_file(filename):
+    text = [HEADER]
+    with open(MISCELLANEOUS / f"{filename}.md", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            text.append(line)
+
+    with open(f"{MISCELLANEOUS_DOCS / filename}.md", 'w') as f:
+        f.write("".join(text))
+
+
+def write_miscellaneous():
+    if isdir(MISCELLANEOUS_DOCS):
+        rmtree(MISCELLANEOUS_DOCS)
+    copytree(MISCELLANEOUS, MISCELLANEOUS_DOCS)
+
+    write_miscellaneous_file("contact")
+    write_miscellaneous_file("contribution")
+    write_miscellaneous_file("partners")
+    write_miscellaneous_file("project_description")
+    write_index_file("index")
+
+
+def write_navigation(words_dict, semantic_fields_dict, contributors_dict):
 
     text = []
     with open(SRC / "mkdocs_in.yml", 'r') as f:
@@ -260,26 +280,24 @@ def write_navigation(semantic_fields_dict, contributors_dict, words_dict):
                     text.append(f"            - {s_field}: semantic_fields/{s_field}.md\n")
             elif line.replace(" ", "").startswith("-Contributors:"):
                 for contributor in contributors_dict:
-                    text.append(f"            - {contributor}: contributors/{contributor}.md\n")
+                    name = str(contributor).replace("_", " ").title()
+                    text.append(f"            - {name}: contributors/{contributor}.md\n")
     with open("mkdocs.yml", 'w') as f:
         f.write("".join(text))
 
 
-def write_docs(semantic_fields_dict, contributors_dict, words_dict):
+def make_docs():
+    words_dict, semantic_fields_dict, contributors_dict = get_relations()
     write_words()
     write_semantic_fields(semantic_fields_dict)
     write_contributors(contributors_dict)
-    write_navigation(semantic_fields_dict, contributors_dict, words_dict)
-
-
-def make_docs():
-    semantic_fields_dict, contributors_dict, words_dict = get_relations()
-    write_docs(semantic_fields_dict, contributors_dict, words_dict)
+    write_miscellaneous()
+    write_navigation(words_dict, semantic_fields_dict, contributors_dict)
     show_errors()
 
 
 def main():
-    action, commit_msg = readArgs()
+    action, commit_msg = read_args()
     if not action:
         return
     elif action == "make":

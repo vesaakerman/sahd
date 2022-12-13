@@ -1,5 +1,3 @@
-<img src="../../img/banner.png" alt="banner" width="800" height="100"> 
-
 # Contact
 
 Contact the editors of the Semantics of Ancient Hebrew Database via e-mail or the contact form below.

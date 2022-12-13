@@ -4,9 +4,9 @@ nav:
     - Words:
     - Semantic fields:
     - Contributors:
-    - Partners: 'other/partners.md'
-    - Contribution: 'other/contribution.md'
-    - Contact: 'other/contact.md'
+    - Partners: 'miscellaneous/partners.md'
+    - Contribution: 'miscellaneous/contribution.md'
+    - Contact: 'miscellaneous/contact.md'
 
 theme:
     name: material
