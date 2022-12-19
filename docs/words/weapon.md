@@ -1,12 +1,6 @@
----
-word_english: weapon
-word_hebrew: אָזֵן
-semantic_fields: something_2, something_1
-contributors: beentjes_pancratius
----
-<img src="../../images/banner.png" alt="banner" width="800" height="100">
+<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
 
-# **אָזֵן – weapon**
+<div><input id="download" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div># **אָזֵן – weapon**
 
 Semantic Fields:
 [something_2](../semantic_fields/something_2.md)&nbsp;&nbsp;&nbsp;[something_1](../semantic_fields/something_1.md)&nbsp;&nbsp;&nbsp;

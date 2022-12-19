@@ -1,4 +1,4 @@
-<img src="../images/banner.png" alt="banner" width="800" height="100">
+<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
 
 # About the project
 

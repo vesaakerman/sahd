@@ -1,12 +1,6 @@
----
-word_english: brazier
-word_hebrew: אַח
-semantic_fields: something_2
-contributors: koster_marinus
----
-<img src="../../images/banner.png" alt="banner" width="800" height="100">
+<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
 
-# **אַח – brazier**
+<div><input id="download" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div># **אַח – brazier**
 
 Semantic Fields:
 [something_2](../semantic_fields/something_2.md)&nbsp;&nbsp;&nbsp;

@@ -11,7 +11,29 @@ nav:
 theme:
     name: material
 
+#custom_dir: docs/overrides
+
+#features:
+#    - content.tooltips
+
+#plugins:
+#    - print-site:
+#        - path_to_pdf: "assets/site.pdf"
+#
 markdown_extensions:
     - attr_list
+#    - pymdownx.emoji:
+#        emoji_index: !!python/name:materialx.emoji.twemoji
+#        emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_css:
+   - stylesheets/extra.css
+
+extra_javascript:
+    - javascripts/extra.js
+
+#plugins:
+#    - pdf-export:
+#        combined: false
 
 

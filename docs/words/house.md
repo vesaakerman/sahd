@@ -1,12 +1,6 @@
----
-word_english: house
-word_hebrew: בַּיִת
-semantic_fields: something_1
-contributors: korpel_marjo
----
-<img src="../../images/banner.png" alt="banner" width="800" height="100">
+<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
 
-# **בַּיִת – house**
+<div><input id="download" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div># **בַּיִת – house**
 
 Semantic Fields:
 [something_1](../semantic_fields/something_1.md)&nbsp;&nbsp;&nbsp;

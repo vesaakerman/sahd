@@ -22,7 +22,8 @@ SEMANTIC_FIELDS_DOCS = DOCS / "semantic_fields"
 CONTRIBUTORS_DOCS = DOCS / "contributors"
 MISCELLANEOUS_DOCS = DOCS / "miscellaneous"
 
-HEADER = '<img src="../../images/banner.png" alt="banner" width="800" height="100">\n\n'
+HEADER = '<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>\n\n'
+PDF = '<div><input id="download" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div>'
 
 errors = []
 
@@ -103,7 +104,7 @@ def get_relations():
                 elif line.startswith("word_hebrew:"):
                     word_hebrew = get_values(line)[0]
                     key = word_hebrew[0]
-                    word_hebrew = "".join(reversed(word_hebrew))
+                    # word_hebrew = "".join(reversed(word_hebrew))
                     if key in words.keys():
                         words[key] = words[key] + [(word_hebrew, word_english)]
                     else:
@@ -148,7 +149,8 @@ def write_words():
         with open(WORDS / filename, "r") as f:
             lines = f.readlines()
             for line in lines:
-                text.append(line)
+                if second_dashes:
+                    text.append(line)
                 if line.strip() == "---" and not first_dashes:
                     first_dashes = True
                 elif line.startswith("word_english:"):
@@ -160,6 +162,7 @@ def write_words():
                 elif line.strip() == "---" and not second_dashes:
                     second_dashes = True
                     text.append(HEADER)
+                    text.append(PDF)
                     if not word_english or not word_hebrew:
                         error(f"Metadata for {filename} incomplete")
                     text.append(f"# **{word_hebrew} – {word_english}**\n\n")
@@ -168,6 +171,7 @@ def write_words():
                         for sf in semantic_fields:
                             text.append(f"[{sf}](../semantic_fields/{sf}.md)&nbsp;&nbsp;&nbsp;")
                         text.append("\n\n")
+
         if not second_dashes:
             error(f"Metadata for {filename} incomplete")
 
@@ -230,7 +234,7 @@ def write_contributors(contributors_dict):
 
 
 def write_index_file(filename):
-    text = [HEADER.replace("../../images", "../images")]
+    text = [HEADER]
     with open(SRC / f"{filename}.md", 'r') as f:
         lines = f.readlines()
         for line in lines:

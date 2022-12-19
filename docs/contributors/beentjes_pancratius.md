@@ -1,8 +1,8 @@
-<img src="../../images/banner.png" alt="banner" width="800" height="100">
+<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
 
 # **Dr. Pancratius C. Beentjes**
 
 Professor (retired) of Old Testament, Tilburg School of Catholic Theology, Utrech
 
 ### Contributions
-[ןֵזָא – weapon](../words/weapon.md)<br>
+[אָזֵן – weapon](../words/weapon.md)<br>

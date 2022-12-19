@@ -3,10 +3,10 @@ nav:
     - Home: index.md
     - Words:
             - א:
-                - ןֵזָא - weapon: words/weapon.md
-                - חַא - brazier: words/brazier.md
+                - אָזֵן - weapon: words/weapon.md
+                - אַח - brazier: words/brazier.md
             - ב:
-                - תִיַּב - house: words/house.md
+                - בַּיִת - house: words/house.md
     - Semantic fields:
             - something_1: semantic_fields/something_1.md
             - something_2: semantic_fields/something_2.md
@@ -21,7 +21,29 @@ nav:
 theme:
     name: material
 
+#custom_dir: docs/overrides
+
+#features:
+#    - content.tooltips
+
+#plugins:
+#    - print-site:
+#        - path_to_pdf: "assets/site.pdf"
+#
 markdown_extensions:
     - attr_list
+#    - pymdownx.emoji:
+#        emoji_index: !!python/name:materialx.emoji.twemoji
+#        emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_css:
+   - stylesheets/extra.css
+
+extra_javascript:
+    - javascripts/extra.js
+
+#plugins:
+#    - pdf-export:
+#        combined: false
 
 
