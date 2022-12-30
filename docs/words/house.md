@@ -1,9 +1,9 @@
 <html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
 
-<div><input id="download" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div># **בַּיִת – house**
+<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div><div><a id="shebanq" title="Word in SHEBANQ" href="https://shebanq.ancient-data.org/hebrew/word?id=1BJTv" target="_blank"><img src="/images/icons/shebanq.png" alt="shebanq"></a></div># **בַּיִת – house**
 
 Semantic Fields:
-[something_1](../semantic_fields/something_1.md)&nbsp;&nbsp;&nbsp;
+[something 1](../semantic_fields/something_1.md)&nbsp;&nbsp;&nbsp;
 
 
 ## 1. Statistics

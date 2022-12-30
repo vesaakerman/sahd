@@ -5,6 +5,8 @@ from pathlib import Path
 import argparse
 from time import sleep
 from subprocess import run, Popen
+import csv
+
 
 SAHD_BASE = Path(".")
 
@@ -23,7 +25,8 @@ CONTRIBUTORS_DOCS = DOCS / "contributors"
 MISCELLANEOUS_DOCS = DOCS / "miscellaneous"
 
 HEADER = '<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>\n\n'
-PDF = '<div><input id="download" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div>'
+DOWNLOAD = '<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div>'
+SHEBANQ = '<div><a id="shebanq" title="Word in SHEBANQ" href="https://shebanq.ancient-data.org/hebrew/word?id=replace" target="_blank"><img src="/images/icons/shebanq.png" alt="shebanq"></a></div>'
 
 errors = []
 
@@ -91,6 +94,75 @@ def get_values(line):
     return value_list
 
 
+def reverse(word):
+    return "".join(reversed(word))
+
+
+def convert_to_id(lex):
+    return "1" + lex.replace(">", "A").replace("<", "O").replace("[", "v").replace("/", "n").replace("=", "i")
+
+
+def create_shebanq_references():
+    shebanq = {}
+
+    with open('shebanq_words.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=';')
+        for row in csv_reader:
+            word_hebrew = row[1]
+            # if word_hebrew == reverse("תִיַּב"):
+            #     for i in range(len(word_hebrew)):
+            #         print(ord(word_hebrew[i]))
+
+            word_id = convert_to_id(row[0])
+
+            key = word_hebrew[0]
+            word_hebrew = reverse(word_hebrew)
+            if key in shebanq.keys():
+                s = set(shebanq[key].keys())
+                if word_hebrew not in s:
+                    shebanq[key][word_hebrew] = word_id
+            else:
+                shebanq[key] = {word_hebrew: word_id}
+            # if word_id == "1BJTn" or word_id == "1BJTv":
+            #     print(row[0])
+            #     print(word_id)
+            #     print(word_hebrew)
+            #     for i in range(len(word_hebrew)):
+            #         print(ord(word_hebrew[i]))
+            #     print(shebanq[key][word_hebrew])
+
+
+    # r = "תיב"
+    # print(shebanq["ב"][r])
+    # r = reverse("בית֜")
+    # print(shebanq["ב"][r])
+
+    return shebanq
+
+
+def get_shebanq_id(word_hebrew, shebanq_dict):
+    # print(word_hebrew)
+    # for i in range(len(word_hebrew)):
+    #     print(ord(word_hebrew[i]))
+    points = (0x5B4, 0x5B5, 0x5B6, 0x5B7, 0x5B8, 0x59C, 0x5BC)
+    pointless = ""
+    for i in range(len(word_hebrew)):
+        if not ord(word_hebrew[i]) in points:
+            pointless += word_hebrew[i]
+        # print(ord(word_hebrew[i]))
+    first_char = pointless[len(pointless) - 1]
+    if pointless in shebanq_dict[first_char]:
+        # print(word_hebrew)
+        # print(reverse(pointless))
+        # print(shebanq_dict[first_char][pointless])
+        # for i in range(len(pointless)):
+        #     print(ord(pointless[i]))
+
+        return shebanq_dict[first_char][pointless]
+    else:
+        return None
+
+
 def get_relations():
     words, semantic_fields, contributors = {}, {}, {}
 
@@ -104,7 +176,7 @@ def get_relations():
                 elif line.startswith("word_hebrew:"):
                     word_hebrew = get_values(line)[0]
                     key = word_hebrew[0]
-                    # word_hebrew = "".join(reversed(word_hebrew))
+                    # word_hebrew = reverse(word_hebrew)
                     if key in words.keys():
                         words[key] = words[key] + [(word_hebrew, word_english)]
                     else:
@@ -138,7 +210,7 @@ def get_relations():
     return words_dict, semantic_fields_dict, contributors_dict
 
 
-def write_words():
+def write_words(shebanq_dict):
     if isdir(WORDS_DOCS):
         rmtree(WORDS_DOCS)
     os.mkdir(WORDS_DOCS)
@@ -162,14 +234,28 @@ def write_words():
                 elif line.strip() == "---" and not second_dashes:
                     second_dashes = True
                     text.append(HEADER)
-                    text.append(PDF)
+                    text.append(DOWNLOAD)
+                    # if reverse(word_hebrew) in shebanq_dict[word_hebrew[0]]:
+                    #     text.append(SHEBANQ)
+                    # print(word_hebrew)
+                    # if word_hebrew.startswith("בַּ"):
+                    # print("word hebrew " + word_hebrew)
+                    shebanq_id = get_shebanq_id(reverse(word_hebrew), shebanq_dict)
+                    if shebanq_id:
+                        # print("shebangid " + shebanq_id)
+                        text.append(SHEBANQ.replace("replace", shebanq_id))
+
+                    # print(word_hebrew[0])
+                    # print(reverse(word_hebrew))
+                    # print (shebanq_dict[word_hebrew[len(word_hebrew) - 1]] )
+                    # print ("\n\n\n\n\n\n\n")
                     if not word_english or not word_hebrew:
                         error(f"Metadata for {filename} incomplete")
-                    text.append(f"# **{word_hebrew} – {word_english}**\n\n")
+                    text.append(f"# **{word_hebrew} – {word_english.replace('_', ' ')}**\n\n")
                     if len(semantic_fields) > 0:
                         text.append("Semantic Fields:\n")
                         for sf in semantic_fields:
-                            text.append(f"[{sf}](../semantic_fields/{sf}.md)&nbsp;&nbsp;&nbsp;")
+                            text.append(f"[{sf.replace('_', ' ')}](../semantic_fields/{sf}.md)&nbsp;&nbsp;&nbsp;")
                         text.append("\n\n")
 
         if not second_dashes:
@@ -200,7 +286,7 @@ def write_semantic_fields(semantic_fields_dict):
                 text.append(line)
             text.append("\n### Related words\n")
             for word in words:
-                text.append(f"[{word[1]} – {word[0]}](../words/{word[0]}.md)<br>")
+                text.append(f"[{word[1]} – {word[0].replace('_', ' ')}](../words/{word[0]}.md)<br>")
 
         with open(SEMANTIC_FIELDS_DOCS / f"{s_field}.md", 'w') as f:
             f.write("".join(text))
@@ -212,7 +298,7 @@ def write_contributors(contributors_dict):
     copytree(CONTRIBUTORS, CONTRIBUTORS_DOCS)
 
     for contributor in contributors_dict:
-        name = contributor.capitalize().replace("_", " ")
+        name = contributor.title().replace("_", " ")
         words = contributors_dict[contributor]
 
         if not exists(CONTRIBUTORS_DOCS / f"{contributor}.md"):
@@ -278,21 +364,21 @@ def write_navigation(words_dict, semantic_fields_dict, contributors_dict):
                 for letter in words_dict:
                     text.append(f"            - {letter}:\n")
                     for word in words_dict[letter]:
-                        text.append(f"                - {word[0]} - {word[1]}: words/{word[1]}.md\n")
+                        text.append(f"                - {word[0]} - {word[1].replace('_', ' ')}: words/{word[1]}.md\n")
             elif line.replace(" ", "").startswith("-Semanticfields:"):
                 for s_field in semantic_fields_dict:
-                    text.append(f"            - {s_field}: semantic_fields/{s_field}.md\n")
+                    text.append(f"            - {s_field.replace('_', ' ')}: semantic_fields/{s_field}.md\n")
             elif line.replace(" ", "").startswith("-Contributors:"):
                 for contributor in contributors_dict:
-                    name = str(contributor).replace("_", " ").title()
-                    text.append(f"            - {name}: contributors/{contributor}.md\n")
+                    text.append(f"            - {contributor.replace('_', ' ').title()}: contributors/{contributor}.md\n")
     with open("mkdocs.yml", 'w') as f:
         f.write("".join(text))
 
 
 def make_docs():
+    shebanq_dict = create_shebanq_references()
     words_dict, semantic_fields_dict, contributors_dict = get_relations()
-    write_words()
+    write_words(shebanq_dict)
     write_semantic_fields(semantic_fields_dict)
     write_contributors(contributors_dict)
     write_miscellaneous()
