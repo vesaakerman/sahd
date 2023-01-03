@@ -352,3 +352,7 @@ As you may have noticed, the documents follow certain strict format:
 	Bibliography
 	
 To make your contribution we ask you to upload a Word documnet 
+
+-[something 2](../semantic_fields/something_2.md)&nbsp;&nbsp;&nbsp;
++[Something 2](../semantic_fields/something_2.md)&nbsp;&nbsp;&nbsp;
+

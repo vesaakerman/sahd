@@ -3,7 +3,7 @@
 <div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div># **פָּלִיט – refugee**
 
 Semantic Fields:
-[deliverance](../semantic_fields/deliverance.md)&nbsp;&nbsp;&nbsp;
+[Deliverance](../semantic_fields/deliverance.md)&nbsp;&nbsp;&nbsp;
 
 
 (For fuller discussion of the lexical field as a whole see the ‘Overview

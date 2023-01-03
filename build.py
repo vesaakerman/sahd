@@ -6,7 +6,7 @@ import argparse
 from time import sleep
 from subprocess import run, Popen
 import csv
-
+from datetime import datetime
 
 SAHD_BASE = Path(".")
 
@@ -37,22 +37,22 @@ def read_args():
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("action", help="make - compiles Markdown files from the source files "
                                        "\nbuild - does `make` and then generates html files from the Markdown files"
-                                       "\ndocs - does `make` and then serves the docs locally and them shows them in your browser"
-                                       "\ng - does `make`, and pushes the whole site to GitHub"
+                                       "\ndocs - does `make` and then serves the docs locally and shows them in your browser"
+                                       "\ngithub - does `make`, and pushes the whole site to GitHub"
                                        "\n          where it will be published under <https://...>"
                                        "\n          the repo itself will also be committed and pushed to GitHub")
-    parser.add_argument("commit_msg", help="Commit message", nargs='?')
+    # parser.add_argument("commit_msg", help="Commit message", nargs='?')
     args = parser.parse_args()
 
     action = args.action
-    commit_msg = args.commit_msg
+    # commit_msg = args.commit_msg
 
-    return action, commit_msg
+    return action
 
 
-def commit(task, msg):
+def commit():
     run(["git", "add", "--all", "."])
-    run(["git", "commit", "-m", msg])
+    run(["git", "commit", "-m", datetime.now().strftime("%m/%d/%Y, %H:%M:%S")])
     run(["git", "push", "origin", "main"])
 
 
@@ -83,6 +83,10 @@ def show_errors():
     for msg in errors:
         print(f"ERROR: {msg}")
     return len(errors)
+
+
+def capitalize(s):
+    return s.replace('_', ' ').title()
 
 
 def get_values(line):
@@ -256,7 +260,7 @@ def write_words(shebanq_dict):
                     if len(semantic_fields) > 0:
                         text.append("Semantic Fields:\n")
                         for sf in semantic_fields:
-                            text.append(f"[{sf.replace('_', ' ')}](../semantic_fields/{sf}.md)&nbsp;&nbsp;&nbsp;")
+                            text.append(f"[{capitalize(sf)}](../semantic_fields/{sf}.md)&nbsp;&nbsp;&nbsp;")
                         text.append("\n\n")
 
         if not second_dashes:
@@ -314,7 +318,7 @@ def write_contributors(contributors_dict):
                 text.append(line)
             text.append("\n### Contributions\n")
             for word in words:
-                text.append(f"[{word[1]} – {word[0]}](../words/{word[0]}.md)<br>")
+                text.append(f"[{word[1]} – {word[0].replace('_', ' ')}](../words/{word[0]}.md)<br>")
 
         with open(CONTRIBUTORS_DOCS / f"{contributor}.md", 'w') as f:
             f.write("".join(text))
@@ -368,10 +372,10 @@ def write_navigation(words_dict, semantic_fields_dict, contributors_dict):
                         text.append(f"                - {word[0]} - {word[1].replace('_', ' ')}: words/{word[1]}.md\n")
             elif line.replace(" ", "").startswith("-Semanticfields:"):
                 for s_field in semantic_fields_dict:
-                    text.append(f"            - {s_field.replace('_', ' ').title()}: semantic_fields/{s_field}.md\n")
+                    text.append(f"            - {capitalize(s_field)}: semantic_fields/{s_field}.md\n")
             elif line.replace(" ", "").startswith("-Contributors:"):
                 for contributor in contributors_dict:
-                    text.append(f"            - {contributor.replace('_', ' ').title()}: contributors/{contributor}.md\n")
+                    text.append(f"            - {capitalize(contributor)}: contributors/{contributor}.md\n")
     with open("mkdocs.yml", 'w') as f:
         f.write("".join(text))
 
@@ -384,11 +388,11 @@ def make_docs():
     write_contributors(contributors_dict)
     write_miscellaneous()
     write_navigation(words_dict, semantic_fields_dict, contributors_dict)
-    show_errors()
+    return not show_errors()
 
 
 def main():
-    action, commit_msg = read_args()
+    action = read_args()
     if not action:
         return
     elif action == "make":
@@ -399,10 +403,10 @@ def main():
     elif action == "docs":
         if make_docs():
             serve_docs()
-    elif action == "g":
+    elif action == "github":
         if make_docs():
-            ship_docs()
-            commit(action, commit_msg)
+            # ship_docs()
+            commit()
 
 
 main()
