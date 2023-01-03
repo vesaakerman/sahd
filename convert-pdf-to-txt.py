@@ -37,9 +37,9 @@ def convert(input, output):
                 m = re.search(r"^ *([0-9]+\.)[ \t].*", line)
                 if m:
                     line = "## " + line
-                m = re.search(r"^ *([0-9]+)[ \t]*↑.*", line)
-                if m:
-                    line = re.sub(r"^ *([0-9]+)([ \t]*↑)(.*)", r"[^\1]: \3", line)
+                line = re.sub(r"^ *([0-9]+\.)[ \t].*", r"## \0", line)
+                line = re.sub(r"^ *([0-9]+).?([ \t]*↑)(.*)", r"[^\1]: \3", line)
+                line = re.sub(r"^[ \t]*([a-zA-Z]?[0-9.]+)([ \t].*$)", r"**\1** \2", line)
                 f.write(line)
 
     print(f"{input} converted to {output}")

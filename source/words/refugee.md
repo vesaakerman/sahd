@@ -1,9 +1,14 @@
-פָּלִיט
+---
+word_english: refugee
+word_hebrew: פָּלִיט
+semantic_fields: deliverance
+contributors: williams_p_j
+---
 
 (For fuller discussion of the lexical field as a whole see the ‘Overview
 of SAHD entries for “Deliverance” words’ on this site)
 
-Introduction
+## Introduction
 
 Grammatical Type: n m.
 
@@ -12,69 +17,69 @@ written as MT in 1QIsa^(a)), 0x inscr.
 
 Text Doubtful:
 
-A.1 Licht (1957:100) restored ט[פלי] in 1QH 5.6. Delcor (1962:156)
+**A.1**  Licht (1957:100) restored ט[פלי] in 1QH 5.6. Delcor (1962:156)
 rejects this restoration, though Vermes (1997:267) translates the term
 “[deliverance]” and thus suggests a restoration similar to that of
 Licht: probably pallēṭ (infinitive piel). The reading here is too
 isolated and uncertain to be of semantic use.
 
-A.2 The occurrence of י]ט[י]פל in 4Q217 12.3 is almost certain, and is
+**A.2**  The occurrence of י]ט[י]פל in 4Q217 12.3 is almost certain, and is
 adopted by DJD (XIII:32). This should probably be taken as pālīṭ rather
 than pālēṭ because of the plene spelling and because the phraseology
 with שׁוב ‘return’ seems closer to Jr 44.28 than to Jr 44.14b.
 
-B.1 BHS Ezk 24.27 suggests that אֶת־הַפָּלִיט may have been added, although
+**B.1**  BHS Ezk 24.27 suggests that אֶת־הַפָּלִיט may have been added, although
 this suggestion has no direct textual support, and there is no obvious
 process for the addition of this phrase to take place.
 
-B.2 BHS Jdg 12.4 claims that much of v. 4b, including פָּלִיט, was not
+**B.2**  BHS Jdg 12.4 claims that much of v. 4b, including פָּלִיט, was not
 represented in the earliest form of the LXX, but this not semantically
 relevant.
 
 Qere/Ketiv: none.
 
-1. Root and Comparative Material
+## 1. Root and Comparative Material
 
-A.1 See פלט Qal.
+**A.1**  See פלט Qal.
 
-A.2 Ben-Hayyim (1957:559) attests פליט in Samaritan Hebrew.
+**A.2**  Ben-Hayyim (1957:559) attests פליט in Samaritan Hebrew.
 
-A.3 GenR 42.8 on Gn 14.13 uses פָּלִיט.
+**A.3**  GenR 42.8 on Gn 14.13 uses פָּלִיט.
 
-B.1 Hubbard (1997:623) says that פָּלִיט “comes from” the adjective
+**B.1**  Hubbard (1997:623) says that פָּלִיט “comes from” the adjective
 פָּלֵיט(written with short “a”), though there is no evidence for this.
 
-2. Formal Characteristics
+## 2. Formal Characteristics
 
-A.1 Hasel (1989:593 = 2001:555) says that the form פָּלִיט “entstammt einer
+**A.1**  Hasel (1989:593 = 2001:555) says that the form פָּלִיט “entstammt einer
 Adjektivform”, and defines it as a qati:l form (thus also HAL:880a).
 Barth (1894:§125e) states that this qati:l form is an active participle
 from an i-imperfect verb (the i-imperfect is attested in the proper name
 יַפְלֵט [1Ch 7.32, 33]). In contrast to Barth, Waltke & O’Connor (1990:88,
 §5.3c) suggest that in the case of פָּלִיט the form has a passive sense.
 
-B.1 [nil]
+**B.1**  [nil]
 
-3. Syntagmatics
+## 3. Syntagmatics
 
-A.1 Subj בּוֹא (Gn 14.13, Is 45.20, Ezk 24.26, 33.21), נגד hiph (Gn
+**A.1**  Subj בּוֹא (Gn 14.13, Is 45.20, Ezk 24.26, 33.21), נגד hiph (Gn
 14.13), אָמַר (Jdg 12.4, 5), יָצָא (2Kg 9.15), קבץ niph (Is 45.20), נגשׁ hitp
 (Is 45.20), הָיָה (Jr 42.17, 44.14, La 2.22), שׁוּב (Jr 44.28, 4Q217
 fr12.3?), זָכַר (Ezk 6.9), פָּלַט qal (Ezk 7.16), מלט niph (Am 9.1).
 
-A.2 Obj שׁאר hiph (Josh 8.22), כרת hiph (Ob 14).
+**A.2**  Obj שׁאר hiph (Josh 8.22), כרת hiph (Ob 14).
 
-A.3 Nomen regens of אֶפְרַיִם (Jdg 12.4, 5), הַגּוֹיִם (Is 45.20), חֶרֶב (Jr
+**A.3**  Nomen regens of אֶפְרַיִם (Jdg 12.4, 5), הַגּוֹיִם (Is 45.20), חֶרֶב (Jr
 44.28, Ezk 6.8).
 
-A.4 Nomen rectum of בּוֹא infinitive construct (Ezk 33.22). In its deep
+**A.4**  Nomen rectum of בּוֹא infinitive construct (Ezk 33.22). In its deep
 structure it is the subject of בּוֹא.
 
-B.1 [nil]
+**B.1**  [nil]
 
-4. Versions
+## 4. Versions
 
-a. LXX:
+**a.**  LXX:
 
 τῶν ἀνασωθέντων τις (Gn 14.13);
 
@@ -100,7 +105,7 @@ a. LXX:
 
 αὐτόν (Ezk 33.22). [see B.1]
 
-b. The Three:
+**b.**  The Three:
 
 Aq σεσωσμένος (Jr 42.17, 44.14);
 
@@ -114,7 +119,7 @@ Sym ὁ διαφεύγων (Ezk 24.27);
 
 Thd οἱ διαπεφευγότες (Is 45.20).
 
-c. Pesh:
+**c.**  Pesh:
 
 mn dʾtplṭ (Gn 14.13);
 
@@ -144,7 +149,7 @@ dmtpṣʾ (Am 9.1);
 
 zero (Jdg 12.4).
 
-d. Tg:
+**d.**  Tg:
 
 שֵׁיזָבָא (La 2.22);
 
@@ -165,7 +170,7 @@ Ezk 6.8, 9, 7.16a, 24.26, 27, 33.21, 22);
 
 מתפציה (Gn 14.13 Samaritan Tg).
 
-e. Vg:
+**e.**  Vg:
 
 unus qui evaserat (Gn 14.13);
 
@@ -195,7 +200,7 @@ qui effugiat (Jr 44.14);
 
 qui effugeret (La 2.22).
 
-A.1 Each version shows a preference for a particular root in its own
+**A.1**  Each version shows a preference for a particular root in its own
 language. The LXX generally translates the lexeme by a compound of or
 cognate of σῴζω ‘save’. Sym usually translates by a compound of φεύγω
 ‘flee’. Pesh, when not translating by cognate ʾtplṭ, most often uses
@@ -205,23 +210,23 @@ lexeme means “one who is saved through flight”. In addition there is
 some variation between translation equivalents that present the escape
 or flight as in the past, and those that present it in the present.
 
-A.2 The possible exceptions, where the meaning given is more negative,
+**A.2**  The possible exceptions, where the meaning given is more negative,
 are מְעָרְקוֹהִי in Tg at Ob 14 (‘fugitives, refugees’) and in Vg fugitivus
 and some or all of the forms of fugio, ‘flee’, where there is no
 guarantee of a positive outcome.
 
-A.3 The versions reveal no obvious distinction between פָּלִיט and פָּלֵט.
+**A.3**  The versions reveal no obvious distinction between פָּלִיט and פָּלֵט.
 
-B.1 LXX in Ezk 33.22 uses αὐτόν to refer back to its rendering of פָּלִיט
+**B.1**  LXX in Ezk 33.22 uses αὐτόν to refer back to its rendering of פָּלִיט
 in v. 21 to avoid repetition.
 
-5. Lexical/Semantic Field(s)
+## 5. Lexical/Semantic Field(s)
 
-A.1 For a discussion of the semantic field of lexemes of the root פלט,
+**A.1**  For a discussion of the semantic field of lexemes of the root פלט,
 and for a contrast of these lexemes with those of the root מלט see
 Lexical/Semantic Field(s) of פלט piel.
 
-A.2 It has been suggested by Zorell (651a) that פָּלֵט supplies the
+**A.2**  It has been suggested by Zorell (651a) that פָּלֵט supplies the
 absolute pl of פָּלִיט, which only occurs in the absolute sing, construct
 pl and suffixed pl. However, this distribution may be merely a
 by-product of the fundamental difference these lexemes display, despite
@@ -270,40 +275,40 @@ The distinction between the lexemes need not be absolute. Thus in Am 9.1
 נָס appears in parallel to פָּלִיט suggesting that the פָּלִיט was still on the
 move.
 
-A.3 Parallel with שָׂרִיד (Josh 8.22, Jr 42.17, 44.14, Ob 14, La 2.22), נָס
+**A.3**  Parallel with שָׂרִיד (Josh 8.22, Jr 42.17, 44.14, Ob 14, La 2.22), נָס
 (Am 9.1).
 
-B.1 [nil]
+**B.1**  [nil]
 
-6. Exegesis
+## 6. Exegesis
 
-A.1 The exegesis of a number of individual passages is covered in
+**A.1**  The exegesis of a number of individual passages is covered in
 Lexical/Semantic Field(s).
 
-A.2 Hasel (1974:184) believes that in Am 9.1 the terms אַחֲרִית and פָּלִיט
+**A.2**  Hasel (1974:184) believes that in Am 9.1 the terms אַחֲרִית and פָּלִיט
 “throw light upon each other”. However, the relationship between נָס and
 פָּלִיט is closer.
 
-A.3 Zorell (651a) understands פָּלִיט as “qui salvus seu superstes est”,
+**A.3**  Zorell (651a) understands פָּלִיט as “qui salvus seu superstes est”,
 and Alonso Schökel (584b) understands it as “superviviente, evadido,
 escapado, fugado, fugitivo”.
 
-A.4 The notion of survived danger is not at all obvious for Jdg 12.4.
+**A.4**  The notion of survived danger is not at all obvious for Jdg 12.4.
 
-B.1 [nil]
+**B.1**  [nil]
 
-7. Conclusion
+## 7. Conclusion
 
-A.1 The פָּלִיט is generally a person who has escaped a horizon of danger.
+**A.1**  The פָּלִיט is generally a person who has escaped a horizon of danger.
 It is often to be contrasted with פָּלֵט, which depicts someone as still on
 the move, or unsettled. פָּלִיט does not have the negative connotations
 usually present in פָּלֵט.
 
-B.1 Zorell (651a) advocates the complementary nature of פָּלִיט and פָּלֵט,
+**B.1**  Zorell (651a) advocates the complementary nature of פָּלִיט and פָּלֵט,
 the latter seeming to supply the absolute pl of פָּלִיט. It has been argued
 in Lexical/Semantic Field(s) that this conclusion cannot be sustained.
 
-Bibliography
+## Bibliography
 
 Barth, J. ²1894. Die Nominalbildung in den semitischen Sprachen.
 Leipzig.

@@ -144,12 +144,13 @@ def get_shebanq_id(word_hebrew, shebanq_dict):
     # print(word_hebrew)
     # for i in range(len(word_hebrew)):
     #     print(ord(word_hebrew[i]))
-    points = (0x5B4, 0x5B5, 0x5B6, 0x5B7, 0x5B8, 0x59C, 0x5BC)
+    # points = (0x5B4, 0x5B5, 0x5B6, 0x5B7, 0x5B8, 0x59C, 0x5BC)
     pointless = ""
     for i in range(len(word_hebrew)):
-        if not ord(word_hebrew[i]) in points:
+        if not ord(word_hebrew[i]) < 0x5D0:
             pointless += word_hebrew[i]
         # print(ord(word_hebrew[i]))
+    # print(reverse(pointless))
     first_char = pointless[len(pointless) - 1]
     if pointless in shebanq_dict[first_char]:
         # print(word_hebrew)
@@ -367,7 +368,7 @@ def write_navigation(words_dict, semantic_fields_dict, contributors_dict):
                         text.append(f"                - {word[0]} - {word[1].replace('_', ' ')}: words/{word[1]}.md\n")
             elif line.replace(" ", "").startswith("-Semanticfields:"):
                 for s_field in semantic_fields_dict:
-                    text.append(f"            - {s_field.replace('_', ' ')}: semantic_fields/{s_field}.md\n")
+                    text.append(f"            - {s_field.replace('_', ' ').title()}: semantic_fields/{s_field}.md\n")
             elif line.replace(" ", "").startswith("-Contributors:"):
                 for contributor in contributors_dict:
                     text.append(f"            - {contributor.replace('_', ' ').title()}: contributors/{contributor}.md\n")
