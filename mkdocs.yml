@@ -1,4 +1,7 @@
 site_name: SAHD
+
+site_url: 'https://vesaakerman.github.io/sahd/'
+
 nav:
     - Home: index.md
     - Words:
@@ -20,6 +23,7 @@ nav:
             - Korpel Marjo: contributors/korpel_marjo.md
             - Koster Marinus: contributors/koster_marinus.md
             - Williams P J: contributors/williams_p_j.md
+            - Åkerman Vesa: contributors/åkerman_vesa.md
     - Partners: 'miscellaneous/partners.md'
     - Contribution: 'miscellaneous/contribution.md'
     - Contact: 'miscellaneous/contact.md'

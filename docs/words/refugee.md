@@ -1,6 +1,6 @@
-<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
+<html><body><img id="banner" src="/sahd/images/banner.png" alt="banner" /></body></html>
 
-<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div># **פָּלִיט – refugee**
+<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/sahd/images/icons/download3.png" alt="download" /></div># **פָּלִיט – refugee**
 
 Semantic Fields:
 [Deliverance](../semantic_fields/deliverance.md)&nbsp;&nbsp;&nbsp;

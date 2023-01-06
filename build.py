@@ -7,6 +7,7 @@ from time import sleep
 from subprocess import run, Popen
 import csv
 from datetime import datetime
+import re
 
 SAHD_BASE = Path(".")
 
@@ -19,33 +20,35 @@ WORDS = SRC / "words"
 SEMANTIC_FIELDS = SRC / "semantic_fields"
 CONTRIBUTORS = SRC / "contributors"
 MISCELLANEOUS = SRC / "miscellaneous"
+PHOTOS = SRC / "photos"
 WORDS_DOCS = DOCS / "words"
 SEMANTIC_FIELDS_DOCS = DOCS / "semantic_fields"
 CONTRIBUTORS_DOCS = DOCS / "contributors"
 MISCELLANEOUS_DOCS = DOCS / "miscellaneous"
+PHOTOS_DOCS = DOCS / "images/photos"
 
-HEADER = '<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>\n\n'
-DOWNLOAD = '<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/images/icons/download3.png" alt="download" /></div>'
-SHEBANQ = '<div><a id="shebanq" title="Word in SHEBANQ" href="https://shebanq.ancient-data.org/hebrew/word?id=replace" target="_blank"><img src="/images/icons/shebanq.png" alt="shebanq"></a></div>'
+HEADER = '<html><body><img id="banner" src="/sahd/images/banner.png" alt="banner" /></body></html>\n\n'
+DOWNLOAD = '<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/sahd/images/icons/download3.png" alt="download" /></div>'
+SHEBANQ = '<div><a id="shebanq" title="Word in SHEBANQ" href="https://shebanq.ancient-data.org/hebrew/word?id=replace" target="_blank"><img src="/sahd/images/icons/shebanq.png" alt="shebanq"></a></div>'
+
+PHOTO_PATH = r"(.*!\[.*])(\(.*/(.*\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|tiff|TIFF)))(.*)"
+PHOTO_PATH_REPLACEMENT = r"\1(/sahd/images/photos/\3\5"
 
 errors = []
 
 
 def read_args():
-    parser = argparse.ArgumentParser(description='SAHD - build.py',
+    parser = argparse.ArgumentParser(description='build.py',
         usage='use "%(prog)s --help" for more information',
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("action", help="make - compiles Markdown files from the source files "
-                                       "\nbuild - does `make` and then generates html files from the Markdown files"
                                        "\ndocs - does `make` and then serves the docs locally and shows them in your browser"
                                        "\ngithub - does `make`, and pushes the whole site to GitHub"
                                        "\n          where it will be published under <https://...>"
                                        "\n          the repo itself will also be committed and pushed to GitHub")
-    # parser.add_argument("commit_msg", help="Commit message", nargs='?')
     args = parser.parse_args()
 
     action = args.action
-    # commit_msg = args.commit_msg
 
     return action
 
@@ -113,12 +116,7 @@ def create_shebanq_references():
         csv_reader = csv.reader(csv_file, delimiter=';')
         for row in csv_reader:
             word_hebrew = row[1]
-            # if word_hebrew == reverse("תִיַּב"):
-            #     for i in range(len(word_hebrew)):
-            #         print(ord(word_hebrew[i]))
-
             word_id = convert_to_id(row[0])
-
             key = word_hebrew[0]
             word_hebrew = reverse(word_hebrew)
             if key in shebanq.keys():
@@ -127,42 +125,18 @@ def create_shebanq_references():
                     shebanq[key][word_hebrew] = word_id
             else:
                 shebanq[key] = {word_hebrew: word_id}
-            # if word_id == "1BJTn" or word_id == "1BJTv":
-            #     print(row[0])
-            #     print(word_id)
-            #     print(word_hebrew)
-            #     for i in range(len(word_hebrew)):
-            #         print(ord(word_hebrew[i]))
-            #     print(shebanq[key][word_hebrew])
-
-
-    # r = "תיב"
-    # print(shebanq["ב"][r])
-    # r = reverse("בית֜")
-    # print(shebanq["ב"][r])
 
     return shebanq
 
 
 def get_shebanq_id(word_hebrew, shebanq_dict):
-    # print(word_hebrew)
-    # for i in range(len(word_hebrew)):
-    #     print(ord(word_hebrew[i]))
-    # points = (0x5B4, 0x5B5, 0x5B6, 0x5B7, 0x5B8, 0x59C, 0x5BC)
     pointless = ""
     for i in range(len(word_hebrew)):
-        if not ord(word_hebrew[i]) < 0x5D0:
+        if ord(word_hebrew[i]) >= 0x5D0:
             pointless += word_hebrew[i]
-        # print(ord(word_hebrew[i]))
     # print(reverse(pointless))
     first_char = pointless[len(pointless) - 1]
     if pointless in shebanq_dict[first_char]:
-        # print(word_hebrew)
-        # print(reverse(pointless))
-        # print(shebanq_dict[first_char][pointless])
-        # for i in range(len(pointless)):
-        #     print(ord(pointless[i]))
-
         return shebanq_dict[first_char][pointless]
     else:
         return None
@@ -181,7 +155,6 @@ def get_relations():
                 elif line.startswith("word_hebrew:"):
                     word_hebrew = get_values(line)[0]
                     key = word_hebrew[0]
-                    # word_hebrew = reverse(word_hebrew)
                     if key in words.keys():
                         words[key] = words[key] + [(word_hebrew, word_english)]
                     else:
@@ -215,6 +188,18 @@ def get_relations():
     return words_dict, semantic_fields_dict, contributors_dict
 
 
+def write_index_file():
+    filename = "index.md"
+    text = [HEADER]
+    with open(SRC / f"{filename}", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            text.append(line)
+
+    with open(DOCS / f"{filename}", 'w') as f:
+        f.write("".join(text))
+
+
 def write_words(shebanq_dict):
     if isdir(WORDS_DOCS):
         rmtree(WORDS_DOCS)
@@ -227,6 +212,7 @@ def write_words(shebanq_dict):
             lines = f.readlines()
             for line in lines:
                 if second_dashes:
+                    line = re.sub(PHOTO_PATH, PHOTO_PATH_REPLACEMENT, line) # modify possible photo path
                     text.append(line)
                 if line.strip() == "---" and not first_dashes:
                     first_dashes = True
@@ -240,20 +226,10 @@ def write_words(shebanq_dict):
                     second_dashes = True
                     text.append(HEADER)
                     text.append(DOWNLOAD)
-                    # if reverse(word_hebrew) in shebanq_dict[word_hebrew[0]]:
-                    #     text.append(SHEBANQ)
-                    # print(word_hebrew)
-                    # if word_hebrew.startswith("בַּ"):
-                    # print("word hebrew " + word_hebrew)
+                    # print(word_english)
                     shebanq_id = get_shebanq_id(reverse(word_hebrew), shebanq_dict)
                     if shebanq_id:
-                        # print("shebangid " + shebanq_id)
                         text.append(SHEBANQ.replace("replace", shebanq_id))
-
-                    # print(word_hebrew[0])
-                    # print(reverse(word_hebrew))
-                    # print (shebanq_dict[word_hebrew[len(word_hebrew) - 1]] )
-                    # print ("\n\n\n\n\n\n\n")
                     if not word_english or not word_hebrew:
                         error(f"Metadata for {filename} incomplete")
                     text.append(f"# **{word_hebrew} – {word_english.replace('_', ' ')}**\n\n")
@@ -288,6 +264,7 @@ def write_semantic_fields(semantic_fields_dict):
         with open(SEMANTIC_FIELDS_DOCS / f"{s_field}.md", 'r') as f:
             lines = f.readlines()
             for line in lines:
+                line = re.sub(PHOTO_PATH, PHOTO_PATH_REPLACEMENT, line) # modify possible photo path
                 text.append(line)
             text.append("\n### Related words\n")
             for word in words:
@@ -315,6 +292,7 @@ def write_contributors(contributors_dict):
         with open(CONTRIBUTORS_DOCS / f"{contributor}.md", 'r') as f:
             lines = f.readlines()
             for line in lines:
+                line = re.sub(PHOTO_PATH, PHOTO_PATH_REPLACEMENT, line) # modify possible photo path
                 text.append(line)
             text.append("\n### Contributions\n")
             for word in words:
@@ -322,17 +300,6 @@ def write_contributors(contributors_dict):
 
         with open(CONTRIBUTORS_DOCS / f"{contributor}.md", 'w') as f:
             f.write("".join(text))
-
-
-def write_index_file(filename):
-    text = [HEADER]
-    with open(SRC / f"{filename}.md", 'r') as f:
-        lines = f.readlines()
-        for line in lines:
-            text.append(line)
-
-    with open(DOCS / f"{filename}.md", 'w') as f:
-        f.write("".join(text))
 
 
 def write_miscellaneous_file(filename):
@@ -355,7 +322,12 @@ def write_miscellaneous():
     write_miscellaneous_file("contribution")
     write_miscellaneous_file("partners")
     write_miscellaneous_file("project_description")
-    write_index_file("index")
+
+
+def copy_photos():
+    if isdir(PHOTOS_DOCS):
+        rmtree(PHOTOS_DOCS)
+    copytree(PHOTOS, PHOTOS_DOCS)
 
 
 def write_navigation(words_dict, semantic_fields_dict, contributors_dict):
@@ -383,10 +355,12 @@ def write_navigation(words_dict, semantic_fields_dict, contributors_dict):
 def make_docs():
     shebanq_dict = create_shebanq_references()
     words_dict, semantic_fields_dict, contributors_dict = get_relations()
+    write_index_file()
     write_words(shebanq_dict)
     write_semantic_fields(semantic_fields_dict)
     write_contributors(contributors_dict)
     write_miscellaneous()
+    copy_photos()
     write_navigation(words_dict, semantic_fields_dict, contributors_dict)
     return not show_errors()
 
@@ -397,16 +371,13 @@ def main():
         return
     elif action == "make":
         make_docs()
-    elif action == "build":
-        if make_docs():
-            build_docs()
     elif action == "docs":
         if make_docs():
             serve_docs()
     elif action == "github":
         if make_docs():
-            # ship_docs()
-            commit()
+            ship_docs()
+            # commit()
 
 
 main()

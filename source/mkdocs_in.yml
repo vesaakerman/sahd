@@ -1,4 +1,7 @@
 site_name: SAHD
+
+site_url: 'https://vesaakerman.github.io/sahd/'
+
 nav:
     - Home: index.md
     - Words:

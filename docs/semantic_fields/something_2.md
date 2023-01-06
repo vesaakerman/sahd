@@ -1,4 +1,4 @@
-<html><body><img id="banner" src="/images/banner.png" alt="banner" /></body></html>
+<html><body><img id="banner" src="/sahd/images/banner.png" alt="banner" /></body></html>
 
 # **Something 2**
 

@@ -2,10 +2,10 @@
 word_english: half_a_shekel
 word_hebrew: בֶַּקַע
 semantic_fields: something_2
-contributors: De_Hoop_Raymond 
+contributors: De_Hoop_Raymond, åkerman_vesa 
 ---
 
-# Introduction
+## Introduction
 Grammatical type: n.m.
 
 Occurrences: 2× HB (2/0/0); 0× Sir.; 0× Qum.; 35× Inscr. (Total: 37).
@@ -37,7 +37,7 @@ the root בקע is attested in, for example, Ug. bqʿ, ‘to split, open’,⁶
 Moab. bqʿ, ‘to break through (of dawn)’,⁷ LMHebr. בקע, ‘to split,
 chop’.⁸
 
-בֶַּקַעA.3 The BHebr. word, ‘weight, coin’, is used in a quotation from Exod
+**A.3** The BHebr. word בֶַּקַע, ‘weight, coin’, is used in a quotation from Exod
 38:26 ⁹in the midrashim, such as Bereshit Rabba (84:18):
 
 אַוֶֹם מְכַרְוֶֹם בְּנָהּ שֶׁל רָחֵל בְּעֶשְִׂרִים כֶָּסֶף, לְפִיכָךְ יִהְיֶה כָּל אֶחָד וְאֶחָד מַגִּיעבֿ בֶּקַע
@@ -71,7 +71,7 @@ congregation was
 **A.3**  בֶַּקַעoccurs in apposition: בֶַּקַע … מַחֲצִית הַשֶֶּׁקֶל, ‘a beka … half a
 shekel’, Exod 38:26.¹⁴
 
-Ancient Versions
+## 4. Ancient Versions
 
 **a.**  Septuagint (LXX) and other Greek versions:
 
@@ -99,7 +99,7 @@ Ancient Versions
 
 siclos duos, ‘two shekel’:²² Gen 24:22. No equivalent: Exod 38:26.²³
 
-Lexical/Semantic Fields
+## 5. Lexical/Semantic Fields
 
 **A.1**  בֶַּקַעoccurs in the context of the description of the weight of gold
 (זָָהָב, Gen 24:22) and silver (כֶֶּסֶף, Exod 38:25–26). Another weight
@@ -109,7 +109,7 @@ with the custom of expressing the worth of precious goods in terms of
 weight, whereas an amount of food was described on the basis of its
 size or volume.²⁴
 
-Exegesis
+## 6. Exegesis
 
 **6.1**  Literal Use
 
@@ -141,10 +141,11 @@ the literature on the subject.²⁷ Two of these are presented below
 (figs. 1 and 2), of which the round, stone weight is the most usual
 exemplar of this weight.
 
-![Beka weight](images/photos/beka-weight28.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Beka weight](../photos/beka-weight28.png)
 
-
-Figure 1: Stone beka-weight²⁸ Figure 2: Metal beka-weight²⁹
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Figure 1: Stone beka-weight²⁸
 
 **A.2**  A First Temple period beka weight was discovered during the
 sifting project of archaeological soil originating from the Western
@@ -178,7 +179,7 @@ period.³⁶
 
 בֶַּקַעbeka (half a shekel) 5
 
-Conclusion
+## Conclusion
 
 **A.1**  The בֶַּקַע, ’half shekel’, is part of a weight system that is based
 on the שֶֶׁקֶל. The fact that the found beka weights vary in weight is

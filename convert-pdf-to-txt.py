@@ -1,7 +1,9 @@
 import fitz
 import re
 import argparse
+from os import remove
 
+TEMP = "temp.txt"
 
 def read_args():
     parser = argparse.ArgumentParser(description='converts .pdf file into text-file and reformats some lines to better suit Markdown in SAHD',
@@ -27,21 +29,19 @@ def convert(input, output):
             i += 1
         except:
             end = True
-    with open('temp.txt', "w") as fi:
+    with open(TEMP, "w") as fi:
         fi.write(text)
 
     with open(output, "w") as f:
-        with open('temp.txt', 'r') as file:
+        with open(TEMP, 'r') as file:
             lines = file.readlines()
             for line in lines:
-                m = re.search(r"^ *([0-9]+\.)[ \t].*", line)
-                if m:
-                    line = "## " + line
-                line = re.sub(r"^ *([0-9]+\.)[ \t].*", r"## \0", line)
-                line = re.sub(r"^ *([0-9]+).?([ \t]*↑)(.*)", r"[^\1]: \3", line)
-                line = re.sub(r"^[ \t]*([a-zA-Z]?[0-9.]+)([ \t].*$)", r"**\1** \2", line)
+                line = re.sub(r"^\s*([0-9]+).?(\s*↑)(.*)", r"[^\1]: \3", line)        # footnotes
+                line = re.sub(r"^\s*([0-9]+\.\s.*)", r"## \1", line)                  # headers
+                line = re.sub(r"^\s*([a-zA-Z]?[0-9.]+)(\s.*$)", r"**\1** \2", line)   # sub-headers
                 f.write(line)
 
+    remove(TEMP)
     print(f"{input} converted to {output}")
 
 
