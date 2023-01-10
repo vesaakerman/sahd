@@ -1,4 +1,4 @@
-<html><body><img id="banner" src="/sahd/images/banner.png" alt="banner" /></body></html>
+<html><body><img id="banner" src="/sahd/images/banners/banner.png" alt="banner" /></body></html>
 
 <div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/sahd/images/icons/download3.png" alt="download" /></div><div><a id="shebanq" title="Word in SHEBANQ" href="https://shebanq.ancient-data.org/hebrew/word?id=1AZNv" target="_blank"><img src="/sahd/images/icons/shebanq.png" alt="shebanq"></a></div># **אָזֵן – weapon**
 

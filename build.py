@@ -27,7 +27,7 @@ CONTRIBUTORS_DOCS = DOCS / "contributors"
 MISCELLANEOUS_DOCS = DOCS / "miscellaneous"
 PHOTOS_DOCS = DOCS / "images/photos"
 
-HEADER = '<html><body><img id="banner" src="/sahd/images/banner.png" alt="banner" /></body></html>\n\n'
+HEADER = '<html><body><img id="banner" src="/sahd/images/banners/banner.png" alt="banner" /></body></html>\n\n'
 DOWNLOAD = '<div><input id="download" title="Download/print the document" type="image" onclick="print_document()" src="/sahd/images/icons/download3.png" alt="download" /></div>'
 SHEBANQ = '<div><a id="shebanq" title="Word in SHEBANQ" href="https://shebanq.ancient-data.org/hebrew/word?id=replace" target="_blank"><img src="/sahd/images/icons/shebanq.png" alt="shebanq"></a></div>'
 

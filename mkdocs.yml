@@ -1,6 +1,8 @@
 site_name: SAHD
-
+site_description: >-
+    Semantics of Ancient Hebrew Database.
 site_url: 'https://vesaakerman.github.io/sahd/'
+site_author: Vesa Åkerman
 
 nav:
     - Home: index.md
@@ -10,20 +12,13 @@ nav:
                 - אַח - brazier: words/brazier.md
             - ב:
                 - בַּיִת - house: words/house.md
-                - בֶַּקַע - half a shekel: words/half_a_shekel.md
-            - פ:
-                - פָּלִיט - refugee: words/refugee.md
     - Semantic fields:
-            - Deliverance: semantic_fields/deliverance.md
             - Something 1: semantic_fields/something_1.md
             - Something 2: semantic_fields/something_2.md
     - Contributors:
-            - De Hoop Raymond: contributors/De_Hoop_Raymond.md
             - Beentjes Pancratius: contributors/beentjes_pancratius.md
             - Korpel Marjo: contributors/korpel_marjo.md
             - Koster Marinus: contributors/koster_marinus.md
-            - Williams P J: contributors/williams_p_j.md
-            - Åkerman Vesa: contributors/åkerman_vesa.md
     - Partners: 'miscellaneous/partners.md'
     - Contribution: 'miscellaneous/contribution.md'
     - Contact: 'miscellaneous/contact.md'
@@ -31,31 +26,15 @@ nav:
 theme:
     name: material
 
-#custom_dir: docs/overrides
-
-#features:
-#    - content.tooltips
-
-#plugins:
-#    - print-site:
-#        - path_to_pdf: "assets/site.pdf"
-#
 markdown_extensions:
     - attr_list
     - footnotes
     - md_in_html
-#    - pymdownx.emoji:
-#        emoji_index: !!python/name:materialx.emoji.twemoji
-#        emoji_generator: !!python/name:materialx.emoji.to_svg
 
 extra_css:
    - stylesheets/extra.css
 
 extra_javascript:
     - javascripts/extra.js
-
-#plugins:
-#    - pdf-export:
-#        combined: false
 
 
